@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Programs — KMGC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Additional styles specific to the Programs page */
+    .page-intro {
+      text-align: center;
+      padding: 60px 0 40px;
+      background: linear-gradient(135deg, #fff8f8 0%, #ffecec 100%);
+      margin: 0 -20px 40px;
+      border-radius: 0 0 20px 20px;
+    }
+    
+    .page-intro h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .lead {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--text-soft);
+    }
+    
+    .programs-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin: 50px 0;
+    }
+    
+    .program-card {
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border-left: 4px solid transparent;
+    }
+    
+    .program-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    
+    .program-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .program-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    
+    .program-card:nth-child(1) {
+      border-left-color: var(--primary);
+    }
+    
+    .program-card:nth-child(2) {
+      border-left-color: var(--secondary);
+    }
+    
+    .program-card:nth-child(3) {
+      border-left-color: var(--accent);
+    }
+    
+    .program-card:nth-child(4) {
+      border-left-color: var(--success);
+    }
+    
+    .program-card:nth-child(5) {
+      border-left-color: #9b59b6;
+    }
+    
+    .program-card:nth-child(6) {
+      border-left-color: #3498db;
+    }
+    
+    .program-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .program-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .program-card:nth-child(1) .program-icon {
+      background: var(--gradient-primary);
+    }
+    
+    .program-card:nth-child(2) .program-icon {
+      background: var(--gradient-secondary);
+    }
+    
+    .program-card:nth-child(3) .program-icon {
+      background: var(--gradient-accent);
+    }
+    
+    .program-card:nth-child(4) .program-icon {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+    }
+    
+    .program-card:nth-child(5) .program-icon {
+      background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    }
+    
+    .program-card:nth-child(6) .program-icon {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+    }
+    
+    .program-title {
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+    
+    .program-card p {
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    
+    .program-features {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+    
+    .program-features li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .program-features li:before {
+      content: '✓';
+      color: var(--success);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    
+    .program-features li:last-child {
+      border-bottom: none;
+    }
+    
+    .program-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-small {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+    
+    .program-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #f0f0f0;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-number {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+    
+    .program-categories {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+    
+    .category-filter {
+      background: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      border: 2px solid transparent;
+    }
+    
+    .category-filter:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    
+    .category-filter.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    .programs-cta {
+      text-align: center;
+      margin: 60px 0 40px;
+      padding: 40px;
+      background: linear-gradient(135deg, #fff8f8 0%, #ffecec 100%);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .programs-cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 200px;
+      height: 200px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      opacity: 0.1;
+    }
+    
+    .programs-cta h2 {
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+    
+    .programs-cta p {
+      margin-bottom: 25px;
+      color: var(--text-soft);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .impact-highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 40px 0;
+    }
+    
+    .impact-item {
+      background: white;
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .impact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    
+    .impact-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+    }
+    
+    .impact-item:nth-child(1) .impact-icon {
+      background: var(--gradient-primary);
+    }
+    
+    .impact-item:nth-child(2) .impact-icon {
+      background: var(--gradient-secondary);
+    }
+    
+    .impact-item:nth-child(3) .impact-icon {
+      background: var(--gradient-accent);
+    }
+    
+    .impact-item h4 {
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+    
+    .impact-item p {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+    }
+    
+    /* Animation classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .programs-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .impact-highlights {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .page-intro h1 {
+        font-size: 2.2rem;
+      }
+      
+      .program-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .program-actions {
+        justify-content: center;
+      }
+      
+      .program-categories {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .category-filter {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="Kopano Manyano logo" class="logo" />
+        <span class="brand-text">KMGC</span>
+      </a>
+      <button id="nav-toggle-3" class="nav-toggle" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-3">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a class="active" href="programs.html">Programs</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-intro fade-in">
+      <h1>Our Programs & Services</h1>
+      <p class="lead">Kopano Manyano delivers a comprehensive range of services to address homelessness, trauma, HIV/AIDS, substance abuse and poverty in the Tshwane community.</p>
+    </section>
+
+    <div class="program-categories fade-in">
+      <div class="category-filter active" data-category="all">All Programs</div>
+      <div class="category-filter" data-category="support">Direct Support</div>
+      <div class="category-filter" data-category="health">Health Services</div>
+      <div class="category-filter" data-category="development">Development</div>
+    </div>
+
+    <section class="programs-list">
+      <article class="program-card fade-in" data-categories="support">
+        <div class="program-header">
+          <div class="program-icon">🏠</div>
+          <div>
+            <h2 class="program-title">Homelessness Program</h2>
+            <div class="program-stats">
+              <div class="stat">
+                <span class="stat-number">150+</span>
+                <span class="stat-label">Sheltered Monthly</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">65%</span>
+                <span class="stat-label">Reunited with Families</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>Temporary shelter, reconciling with families, skills training, and job placement initiatives designed to move beneficiaries toward independence.</p>
+        <ul class="program-features">
+          <li>Referral temporary accommodation</li>
+          <li>Family mediation and reunification services</li>
+          <li>Life skills and vocational training</li>
+          <li>Job placement assistance</li>
+          <li>Follow-up support for 6 months</li>
+        </ul>
+        <div class="program-actions">
+          <a class="btn btn-primary btn-small" href="contact.html">Get Help</a>
+          <a class="btn btn-outline btn-small" href="donate.html">Support This Program</a>
+        </div>
+      </article>
+
+      <article class="program-card fade-in" data-categories="support">
+        <div class="program-header">
+          <div class="program-icon">🛡️</div>
+          <div>
+            <h2 class="program-title">Victim Empowerment Program</h2>
+            <div class="program-stats">
+              <div class="stat">
+                <span class="stat-number">80+</span>
+                <span class="stat-label">Monthly Cases</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Crisis Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>Trauma debriefing, counselling, legal awareness and support at police stations to ensure victims receive appropriate assistance and understanding of their rights.</p>
+        <ul class="program-features">
+          <li>Referral temporary accommodation</li>
+          <li>Immediate trauma counseling and debriefing</li>
+          <li>Legal rights awareness workshops</li>
+          <li>Police station support and advocacy</li>
+          <li>Safe temporary accommodation</li>
+          <li>Long-term psychological support</li>
+        </ul>
+        <div class="program-actions">
+          <a class="btn btn-primary btn-small" href="contact.html">Get Support</a>
+          <a class="btn btn-outline btn-small" href="donate.html">Fund This Program</a>
+        </div>
+      </article>
+
+      <article class="program-card fade-in" data-categories="health">
+        <div class="program-header">
+          <div class="program-icon">❤️</div>
+          <div>
+            <h2 class="program-title">HIV/AIDS Home-Based Care</h2>
+            <div class="program-stats">
+              <div class="stat">
+                <span class="stat-number">200+</span>
+                <span class="stat-label">Patients Served</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">15</span>
+                <span class="stat-label">Trained Caregivers</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>Community awareness, testing and support services, home visits for the sick, and reintegration programs supported by partner health professionals.</p>
+        <ul class="program-features">
+          <li>Community HIV/AIDS awareness campaigns</li>
+          <li>Free testing and counseling services</li>
+          <li>Home-based care for bedridden patients</li>
+          <li>Medication adherence support</li>
+          <li>Stigma reduction programs</li>
+          <li>Long-term psychological support</li>
+        </ul>
+        <div class="program-actions">
+          <a class="btn btn-primary btn-small" href="contact.html">Access Services</a>
+          <a class="btn btn-outline btn-small" href="donate.html">Support Healthcare</a>
+        </div>
+      </article>
+
+      <article class="program-card fade-in" data-categories="health">
+        <div class="program-header">
+          <div class="program-icon">💊</div>
+          <div>
+            <h2 class="program-title">Drug & Substance Rehabilitation</h2>
+            <div class="program-stats">
+              <div class="stat">
+                <span class="stat-number">45</span>
+                <span class="stat-label">Active Clients</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">70%</span>
+                <span class="stat-label">Success Rate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>Detoxification and supportive programs that address withdrawal symptoms with nutrition, counseling and longer-term behavioral support.</p>
+        <ul class="program-features">
+          <li>Medically supervised detoxification</li>
+          <li>Individual and group counseling sessions</li>
+          <li>Nutritional support during recovery</li>
+          <li>Relapse prevention programs</li>
+          <li>Family education and support</li>
+        </ul>
+        <div class="program-actions">
+          <a class="btn btn-primary btn-small" href="contact.html">Seek Help</a>
+          <a class="btn btn-outline btn-small" href="donate.html">Fund Rehabilitation</a>
+        </div>
+      </article>
+
+      <article class="program-card fade-in" data-categories="support">
+        <div class="program-header">
+          <div class="program-icon">🍲</div>
+          <div>
+            <h2 class="program-title">Feeding Scheme & Food Security</h2>
+            <div class="program-stats">
+              <div class="stat">
+                <span class="stat-number">1200+</span>
+                <span class="stat-label">Meals Weekly</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">250</span>
+                <span class="stat-label">Food Parcels Monthly</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>Regular feeding programs, food parcel distribution and community gardens to support the most vulnerable households.</p>
+        <ul class="program-features">
+          <li>Daily community feeding program</li>
+          <li>Monthly food parcel distribution</li>
+          <li>Community vegetable gardens</li>
+          <li>Nutrition education workshops</li>
+          <li>Emergency food relief</li>
+        </ul>
+        <div class="program-actions">
+          <a class="btn btn-primary btn-small" href="contact.html">Get Food Support</a>
+          <a class="btn btn-outline btn-small" href="donate.html">Donate Food</a>
+        </div>
+      </article>
+
+      <article class="program-card fade-in" data-categories="development">
+        <div class="program-header">
+          <div class="program-icon">🎓</div>
+          <div>
+            <h2 class="program-title">Youth Development & Skills Training</h2>
+            <div class="program-stats">
+              <div class="stat">
+                <span class="stat-number">180+</span>
+                <span class="stat-label">Youth Trained</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">60%</span>
+                <span class="stat-label">Employment Rate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>Life skills, vocational training, and opportunities for internships/placements to increase employability and community leadership capacity.</p>
+        <ul class="program-features">
+          <li>Vocational skills training programs</li>
+          <li>Life skills and financial literacy workshops</li>
+          <li>Career guidance and counseling</li>
+          <li>Internship and job placement assistance</li>
+          <li>Youth leadership development</li>
+        </ul>
+        <div class="program-actions">
+          <a class="btn btn-primary btn-small" href="contact.html">Join Program</a>
+          <a class="btn btn-outline btn-small" href="donate.html">Support Youth</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="impact-highlights fade-in">
+      <div class="impact-item">
+        <div class="impact-icon">👥</div>
+        <h4>Community Reach</h4>
+        <p>Serving 5+ areas across Tshwane including Marabastad, Pretoria West, and Mamelodi</p>
+      </div>
+      <div class="impact-item">
+        <div class="impact-icon">⏱️</div>
+        <h4>Two Decades of Service</h4>
+        <p>Over 20 years of dedicated service to vulnerable communities since 2001</p>
+      </div>
+      <div class="impact-item">
+        <div class="impact-icon">🤝</div>
+        <h4>Collaborative Approach</h4>
+        <p>Working with health professionals, social workers, and community leaders</p>
+      </div>
+    </section>
+
+    <section class="programs-cta fade-in">
+      <h2>Get Involved With Our Programs</h2>
+      <p>Whether you need support, want to volunteer, or would like to contribute resources, we welcome your participation in our community programs.</p>
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 25px;">
+        <a class="btn btn-primary" href="contact.html">Contact Us for Help</a>
+        <a class="btn btn-outline" href="donate.html">Support Our Programs</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Kopano Manyano</h3>
+        <p>217 Pretorius Street, Pretoria, 0001</p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="donate.html">Donate</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Banking</h4>
+        <p>Standard Bank • Account: 01 011 786 5 • Branch code: 00045</p>
+      </div>
+    </div>
+    <div class="site-credit container">
+      <p>© <span id="year-3"></span> Kopano Manyano • NPO 2003/025940/21</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('year-3').textContent = new Date().getFullYear();
+    
+    // Mobile menu toggle
+    document.getElementById('nav-toggle-3').addEventListener('click', function() {
+      const nav = document.getElementById('nav-3');
+      nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+    });
+    
+    // Program category filtering
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const programCards = document.querySelectorAll('.program-card');
+    
+    categoryFilters.forEach(filter => {
+      filter.addEventListener('click', function() {
+        // Remove active class from all filters
+        categoryFilters.forEach(f => f.classList.remove('active'));
+        
+        // Add active class to clicked filter
+        this.classList.add('active');
+        
+        const category = this.getAttribute('data-category');
+        
+        // Show/hide program cards based on category
+        programCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-categories').includes(category)) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 10);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+    
+    // Scroll animation for fade-in elements
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeInOnScroll = function() {
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    };
+    
+    // Check on load and scroll
+    window.addEventListener('load', fadeInOnScroll);
+    window.addEventListener('scroll', fadeInOnScroll);
+  </script>
+</body>
+</html>

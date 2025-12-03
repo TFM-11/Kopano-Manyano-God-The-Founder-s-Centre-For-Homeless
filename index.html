@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kopano Manyano — Centre for Homeless</title>
+  <meta name="description" content="Kopano Manyano Centre for Homeless — restoring dignity, empowering communities across Tshwane."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
+  <style>
+    /* Additional styles specific to the Homepage */
+    .hero {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: bounce 8s ease-in-out infinite;
+    }
+    
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 50px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-text {
+      animation: fadeInLeft 0.8s ease-out 0.2s both;
+    }
+    
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--text-dark);
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero p {
+      color: var(--text-soft);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    
+    .hero-ctas {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .quick-stats {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+    
+    .quick-stats li {
+      text-align: center;
+    }
+    
+    .quick-stats strong {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    
+    .quick-stats span {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+    
+    .hero-media {
+      animation: fadeInRight 0.8s ease-out 0.4s both;
+      position: relative;
+    }
+    
+    .hero-media::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: 10px;
+      bottom: 10px;
+      background: var(--gradient-primary);
+      border-radius: 20px;
+      z-index: -1;
+      opacity: 0.3;
+    }
+    
+    .hero-media img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.5s ease;
+      position: relative;
+    }
+    
+    .hero-media:hover img {
+      transform: translate(-5px, -5px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin: 60px auto;
+    }
+    
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      transition: all 0.4s ease;
+      border-top: 4px solid transparent;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    
+    .card:nth-child(1):hover {
+      border-top-color: var(--primary);
+    }
+    
+    .card:nth-child(2):hover {
+      border-top-color: var(--secondary);
+    }
+    
+    .card:nth-child(3):hover {
+      border-top-color: var(--accent);
+    }
+    
+    .card h2 {
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .card h2::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    
+    .card:nth-child(1) h2::before {
+      background: var(--primary);
+    }
+    
+    .card:nth-child(2) h2::before {
+      background: var(--secondary);
+    }
+    
+    .card:nth-child(3) h2::before {
+      background: var(--accent);
+    }
+    
+    .card p {
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+    
+    .programs-preview {
+      margin: 80px auto;
+      text-align: center;
+    }
+    
+    .programs-preview h2 {
+      margin-bottom: 20px;
+      color: var(--text-dark);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .programs-preview h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+    
+    .lead {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: var(--text-soft);
+    }
+    
+    .programs-preview .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    
+    .prog-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+    
+    .prog-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 1;
+    }
+    
+    .prog-card:hover::before {
+      opacity: 0.05;
+    }
+    
+    .prog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    
+    .prog-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    
+    .prog-card:hover img {
+      transform: scale(1.1);
+    }
+    
+    .prog-card h3 {
+      padding: 20px 20px 8px;
+      color: var(--text-dark);
+      position: relative;
+      z-index: 2;
+    }
+    
+    .prog-card p {
+      padding: 0 20px 20px;
+      color: var(--text-soft);
+      position: relative;
+      z-index: 2;
+    }
+    
+    .center {
+      text-align: center;
+    }
+    
+    .impact {
+      background: linear-gradient(135deg, #fff8f8 0%, #ffecec 100%);
+      padding: 70px 0;
+      margin-top: 60px;
+      border-top: 2px solid #ffecec;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .impact::before {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: var(--gradient-secondary);
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: bounce 10s ease-in-out infinite;
+    }
+    
+    .impact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .impact h2 {
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+    
+    .impact p {
+      color: var(--text-soft);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    
+    .impact-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+    
+    .impact-stats div {
+      background: white;
+      padding: 25px 15px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      transition: all 0.4s ease;
+      border-bottom: 4px solid transparent;
+    }
+    
+    .impact-stats div:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    
+    .impact-stats div:nth-child(1):hover {
+      border-bottom-color: var(--primary);
+    }
+    
+    .impact-stats div:nth-child(2):hover {
+      border-bottom-color: var(--secondary);
+    }
+    
+    .impact-stats div:nth-child(3):hover {
+      border-bottom-color: var(--accent);
+    }
+    
+    .impact-stats strong {
+      display: block;
+      color: var(--primary);
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .impact-stats div:hover strong {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transform: scale(1.1);
+    }
+    
+    .impact-stats span {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+    
+    /* Animation classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .cards,
+      .programs-preview .grid,
+      .impact-stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .impact-inner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      
+      .quick-stats {
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-ctas {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .hero-ctas .btn {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+      }
+      
+      .quick-stats {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+    
+    /* Custom animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="Kopano Manyano logo" class="logo" />
+        <span class="brand-text">KMGC</span>
+      </a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open menu">☰</button>
+
+      <nav class="nav" id="nav">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text fade-in">
+          <h1>Restoring dignity. Empowering lives.</h1>
+          <p>We support homeless people, victims of violence, and vulnerable families across Tshwane through counseling, shelters, feeding schemes and skills development.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="donate.html">Donate Now</a>
+            <a class="btn btn-outline" href="programs.html">Our Programs</a>
+          </div>
+          <ul class="quick-stats">
+            <li><strong>2001</strong><span>Founded</span></li>
+            <li><strong>5+</strong><span>Areas served</span></li>
+            <li><strong>85+</strong><span>Volunteers</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-media fade-in">
+          <img src="assets/help.jpeg" alt="Volunteers helping community" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission + Vision -->
+    <section class="container cards">
+      <article class="card fade-in">
+        <h2>Our Mission</h2>
+        <p>To restore human dignity and support vulnerable individuals and communities in their journey from dependency to self-reliance.</p>
+      </article>
+
+      <article class="card fade-in">
+        <h2>Our Vision</h2>
+        <p>To build an enabling environment that develops human capacity and lifts vulnerable families into sustainable livelihoods.</p>
+      </article>
+
+      <article class="card fade-in">
+        <h2>Our Values</h2>
+        <p>Responsibility • Respect • Honesty • Support • Love • Empathy • Competence • Commitment</p>
+      </article>
+    </section>
+
+    <!-- Programs preview -->
+    <section class="container programs-preview">
+      <h2 class="fade-in">Programs & Services</h2>
+      <p class="lead fade-in">We work across homelessness, victim empowerment, HIV/AIDS homecare, drug rehabilitation, youth development and food security.</p>
+
+      <div class="grid">
+        <article class="prog-card fade-in">
+          <img src="assets/shelterr.jpeg" alt="Shelter building" />
+          <h3>Homelessness Support</h3>
+          <p>Temporary shelter, family reconnection, skills training and job placement.</p>
+        </article>
+
+        <article class="prog-card fade-in">
+          <img src="assets/victim.jpeg" alt="Counseling" />
+          <h3>Victim Empowerment</h3>
+          <p>Trauma counseling, debriefing and legal awareness programs.</p>
+        </article>
+
+        <article class="prog-card fade-in">
+          <img src="assets/hiv.jpeg" alt="HIV care" />
+          <h3>HIV/AIDS & Home Care</h3>
+          <p>Community awareness, home base care, and reintegration support.</p>
+        </article>
+      </div>
+
+      <p class="center fade-in">
+        <a class="btn btn-outline" href="programs.html">View all programs</a>
+      </p>
+    </section>
+
+    <!-- Impact / CTA -->
+    <section class="impact">
+      <div class="container impact-inner">
+        <div class="fade-in">
+          <h2>Help us change lives today</h2>
+          <p>Your support funds shelters, counseling, meal programs and training that enable people to rebuild their lives.</p>
+          <a class="btn btn-primary" href="donate.html">Support Our Work</a>
+        </div>
+        <div class="impact-stats fade-in">
+          <div><strong data-count="10000">0</strong><span>Meals served</span></div>
+          <div><strong data-count="500">0</strong><span>People counselled</span></div>
+          <div><strong data-count="300">0</strong><span>Volunteers trained</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Kopano Manyano</h3>
+        <p>217 Pretorius Street, Barend Van Erkom Building, Pretoria, 0001</p>
+        <p>Tel: 012 304 0670 • Cell: 082 228 1597</p>
+        <p>Email: <a href="mailto:kopanomanyano51@gmail.com">kopanomanyano51@gmail.com</a></p>
+      </div>
+
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="donate.html">Donate</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Banking</h4>
+        <p><strong>Kopano Manyano God The Founder Centre for Homeless</strong></p>
+        <p>Standard Bank • Account: 01 011 786 5 • Branch code: 00045</p>
+        <p>Account type: Current</p>
+      </div>
+    </div>
+
+    <div class="site-credit container">
+      <p>© <span id="year"></span> Kopano Manyano </p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile menu toggle
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+      const nav = document.getElementById('nav');
+      nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+    });
+    
+    // Animate impact stats counting up
+    const statNumbers = document.querySelectorAll('.impact-stats strong');
+    
+    const animateStats = function() {
+      statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-count'));
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          stat.textContent = Math.floor(current).toLocaleString();
+        }, 16);
+      });
+    };
+    
+    // Scroll animation for fade-in elements
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeInOnScroll = function() {
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+          
+          // Animate stats when they become visible
+          if (element.classList.contains('impact-stats')) {
+            animateStats();
+          }
+        }
+      });
+    };
+    
+    // Check on load and scroll
+    window.addEventListener('load', fadeInOnScroll);
+    window.addEventListener('scroll', fadeInOnScroll);
+  </script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — KMGC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Additional styles specific to the About page */
+    .page-intro {
+      text-align: center;
+      padding: 60px 0 40px;
+      background: linear-gradient(135deg, #fff8f8 0%, #ffecec 100%);
+      margin: 0 -20px 40px;
+      border-radius: 0 0 20px 20px;
+    }
+    
+    .page-intro h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .lead {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--text-soft);
+    }
+    
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    
+    .content-grid article h2 {
+      margin-bottom: 20px;
+      color: var(--text-dark);
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .content-grid article h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+    
+    .content-grid article h3 {
+      margin: 30px 0 15px;
+      color: var(--secondary);
+    }
+    
+    .content-grid article p {
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    
+    .sidebar {
+      background: var(--light-grey);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      align-self: start;
+      position: sticky;
+      top: 100px;
+    }
+    
+    .sidebar h3 {
+      margin-bottom: 20px;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 8px;
+    }
+    
+    .sidebar h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    
+    .sidebar ul {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+    
+    .sidebar li {
+      padding: 10px 0;
+      border-bottom: 1px solid #e8e8e8;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .sidebar li:before {
+      content: '•';
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    
+    .sidebar li:last-child {
+      border-bottom: none;
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .value-item {
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .value-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(214, 0, 0, 0.1);
+      background: var(--primary);
+      color: white;
+    }
+    
+    .leadership-card {
+      background: white;
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      margin: 25px 0;
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .leadership-card:hover {
+      transform: translateX(5px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    
+    .leadership-card h4 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px;
+      background: var(--light-grey);
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+    
+    .mission-vision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin: 30px 0;
+    }
+    
+    .mission-box, .vision-box {
+      background: white;
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mission-box:hover, .vision-box:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    
+    .mission-box::before, .vision-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+    }
+    
+    .mission-box::before {
+      background: var(--gradient-primary);
+    }
+    
+    .vision-box::before {
+      background: var(--gradient-secondary);
+    }
+    
+    .mission-box h3, .vision-box h3 {
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .accounting-section {
+      background: var(--light-grey);
+      padding: 40px;
+      border-radius: var(--radius);
+      margin: 40px 0;
+      text-align: center;
+    }
+    
+    .accounting-section h2 {
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+    
+    .transparency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      box-shadow: var(--card-shadow);
+      margin-top: 20px;
+      font-weight: 600;
+      color: var(--success);
+    }
+    
+    /* Animation classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .mission-vision {
+        grid-template-columns: 1fr;
+      }
+      
+      .values-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .sidebar {
+        position: static;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .page-intro h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- reuse same header markup as index.html -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="Kopano Manyano logo" class="logo" />
+        <span class="brand-text">KMGC</span>
+      </a>
+      <button id="nav-toggle-2" class="nav-toggle" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-2">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a class="active" href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-intro fade-in">
+      <h1>About Kopano Manyano</h1>
+      <p class="lead">Kopano Manyano God The Founder Centre for Homeless, works to restore dignity and support vulnerable people across Pretoria and surrounding areas.</p>
+    </section>
+
+    <section class="content-grid">
+      <article>
+        <div class="fade-in">
+          <h2>Our Story</h2>
+          <p>The organization started in 2001 at 139 Mears Street, Sunnyside, Pretoria. Founded by Pastor Catherine Mogale, the centre began as a place to help homeless people and victims of abuse, offering counseling, support and basic services.</p>
+        </div>
+
+        <div class="fade-in">
+          <h3>Leadership</h3>
+          <div class="leadership-card">
+            <h4>Pastor Catherine Mogale</h4>
+            <p><strong>Director / CEO</strong></p>
+            <p>With over two decades of dedicated service, Pastor Mogale has been the driving force behind Kopano Manyano's mission to restore dignity and hope to vulnerable communities.</p>
+            <div class="contact-info">
+              <div class="contact-item">
+                <span>📞</span> 087 265 1327
+              </div>
+              <div class="contact-item">
+                <span>📱</span> 082 228 1597
+              </div>
+              <div class="contact-item">
+                <span>✉️</span> <a href="mailto:kopanomanyano51@gmail.com">kopanomanyano51@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fade-in">
+          <h3>Vision & Mission</h3>
+          <div class="mission-vision">
+            <div class="vision-box">
+              <h3>🌟 Vision</h3>
+              <p>To establish an enabling environment that promotes human capacity and develops vulnerable individuals, families and communities into self-reliance.</p>
+            </div>
+            <div class="mission-box">
+              <h3>🎯 Mission</h3>
+              <p>To restore human dignity and demonstrate progress in living balanced, disciplined lives.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="sidebar fade-in">
+        <h3>Quick facts</h3>
+        <ul>
+          <li><strong>Registration No:</strong> NPO 2003/025940/21</li>
+          <li><strong>Founded:</strong> 2001</li>
+          <li><strong>Regions served:</strong> Tshwane (Marabastad, Pretoria West, Gezina, Atteridgeville, Mamelodi)</li>
+          <li><strong>Bank:</strong> Standard Bank</li>
+          <li><strong>Account:</strong> 01 011 786 5</li>
+          <li><strong>Branch code:</strong> 00045</li>
+        </ul>
+
+        <h3>Our Values</h3>
+        <div class="values-grid">
+          <div class="value-item">Respect</div>
+          <div class="value-item">Honesty</div>
+          <div class="value-item">Support</div>
+          <div class="value-item">Love</div>
+          <div class="value-item">Empathy</div>
+          <div class="value-item">Competence</div>
+          <div class="value-item">Commitment</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="accounting-section fade-in">
+      <h2>Transparency & Accountability</h2>
+      <p>The centre maintains transparent financial records with quarterly reports to the board and audited statements available at year end. We are accountable to our donors and stakeholders and manage assets through regular inventory and audit.</p>
+      <div class="transparency-badge">
+        <span>✓</span> Financial Transparency & Accountability
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Kopano Manyano</h3>
+        <p>217 Pretorius Street, Pretoria, 0001</p>
+        <p>Email: <a href="mailto:kopanomanyano51@gmail.com">kopanomanyano51@gmail.com</a></p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="programs.html">Programs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Banking</h4>
+        <p>Standard Bank • Account: 01 011 786 5 • Branch code: 00045</p>
+      </div>
+    </div>
+    <div class="site-credit container">
+      <p>© <span id="year-2"></span> Kopano Manyano • NPO 2003/025940/21</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('year-2').textContent = new Date().getFullYear();
+    
+    // Mobile menu toggle
+    document.getElementById('nav-toggle-2').addEventListener('click', function() {
+      const nav = document.getElementById('nav-2');
+      nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+    });
+    
+    // Scroll animation for fade-in elements
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeInOnScroll = function() {
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    };
+    
+    // Check on load and scroll
+    window.addEventListener('load', fadeInOnScroll);
+    window.addEventListener('scroll', fadeInOnScroll);
+  </script>
+</body>
+</html>
